@@ -30,6 +30,8 @@ export default function Page() {
       toast.error('Failed to create account');
     } else if (state.status === 'invalid_data') {
       toast.error('Failed validating your submission!');
+    } else if (state.status === 'not_whitelisted') {
+      toast.error('Email is not whitelisted');
     } else if (state.status === 'success') {
       toast.success('Account created successfully');
       setIsSuccessful(true);

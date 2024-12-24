@@ -15,6 +15,8 @@ export interface LoginActionState {
   status: 'idle' | 'in_progress' | 'success' | 'failed' | 'invalid_data';
 }
 
+const WHITELIST_EMAILS = ['nhonnt97@gmail.com', 'nhonn@duck.com', 'uyenthitd@gmail.com'];
+
 export const login = async (
   _: LoginActionState,
   formData: FormData,
@@ -48,6 +50,7 @@ export interface RegisterActionState {
     | 'success'
     | 'failed'
     | 'user_exists'
+    | 'not_whitelisted'
     | 'invalid_data';
 }
 
@@ -65,6 +68,9 @@ export const register = async (
 
     if (user) {
       return { status: 'user_exists' } as RegisterActionState;
+    }
+    if (!WHITELIST_EMAILS.includes(validatedData.email)) {
+      return { status: 'not_whitelisted' } as RegisterActionState;
     }
     await createUser(validatedData.email, validatedData.password);
     await signIn('credentials', {
