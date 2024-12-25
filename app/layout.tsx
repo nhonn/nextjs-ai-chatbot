@@ -6,9 +6,18 @@ import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Next.js Chatbot Template',
-  description: 'Next.js chatbot template using the AI SDK.',
+  metadataBase: new URL('https://ai.desirx.xyz'),
+  title: 'DesirxAI Chatbot',
+  description: 'DesirxAI Chatbot powered by OpenAI',
+  openGraph: {
+    title: 'DesirxAI Chatbot',
+    description: 'DesirxAI Chatbot powered by OpenAI',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DesirxAI Chatbot',
+    description: 'DesirxAI Chatbot powered by OpenAI',
+  },
 };
 
 export const viewport = {
