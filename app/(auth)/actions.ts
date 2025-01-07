@@ -15,7 +15,11 @@ export interface LoginActionState {
   status: 'idle' | 'in_progress' | 'success' | 'failed' | 'invalid_data';
 }
 
-const WHITELIST_EMAILS = ['nhonnt97@gmail.com', 'nhonn@duck.com', 'uyenthitd@gmail.com'];
+const WHITELIST_EMAILS = [
+  'nhonnt97@gmail.com',
+  'nhonn@duck.com',
+  'uyenthitd@gmail.com',
+];
 
 export const login = async (
   _: LoginActionState,
