@@ -25,21 +25,9 @@ export function ModelSelector({
   const [optimisticModelId, setOptimisticModelId] =
     useOptimistic(selectedModelId);
 
-  const avaialbleModels = useMemo(() => {
-    if (!process.env.ANTHROPIC_API_KEY) {
-      return models.filter((model) => !model.id.startsWith("claude"));
-    }
-
-    if (!process.env.OPENAI_API_KEY) {
-      return models.filter((model) => !model.id.startsWith("gpt"));
-    }
-
-    return models;
-  }, []);
-
   const selectedModel = useMemo(
-    () => avaialbleModels.find((model) => model.id === optimisticModelId),
-    [avaialbleModels, optimisticModelId],
+    () => models.find((model) => model.id === optimisticModelId),
+    [optimisticModelId],
   );
 
   return (
@@ -57,7 +45,7 @@ export function ModelSelector({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="min-w-[300px]">
-        {avaialbleModels.map((model) => (
+        {models.map((model) => (
           <DropdownMenuItem
             key={model.id}
             onSelect={() => {

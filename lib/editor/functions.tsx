@@ -1,25 +1,41 @@
-'use client';
+"use client";
 
-import { defaultMarkdownSerializer } from 'prosemirror-markdown';
-import { DOMParser, type Node } from 'prosemirror-model';
-import { Decoration, DecorationSet, type EditorView } from 'prosemirror-view';
-import { renderToString } from 'react-dom/server';
+import {
+  defaultMarkdownSerializer,
+  MarkdownSerializer,
+} from "prosemirror-markdown";
+import { DOMParser, type Node } from "prosemirror-model";
+import { Decoration, DecorationSet, type EditorView } from "prosemirror-view";
+import { renderToString } from "react-dom/server";
 
-import { Markdown } from '@/components/markdown';
+import { Markdown } from "@/components/markdown";
 
-import { documentSchema } from './config';
-import { createSuggestionWidget, type UISuggestion } from './suggestions';
+import { documentSchema } from "./config";
+import { createSuggestionWidget, type UISuggestion } from "./suggestions";
 
 export const buildDocumentFromContent = (content: string) => {
   const parser = DOMParser.fromSchema(documentSchema);
   const stringFromMarkdown = renderToString(<Markdown>{content}</Markdown>);
-  const tempContainer = document.createElement('div');
+  const tempContainer = document.createElement("div");
   tempContainer.innerHTML = stringFromMarkdown;
   return parser.parse(tempContainer);
 };
 
+const markdownSerializer = new MarkdownSerializer(
+  {
+    ...defaultMarkdownSerializer.nodes,
+    preformatted: (state, node) => {
+      state.write("```\n");
+      state.text(node.textContent, false);
+      state.ensureNewLine();
+      state.write("```\n");
+    },
+  },
+  defaultMarkdownSerializer.marks,
+);
+
 export const buildContentFromDocument = (document: Node) => {
-  return defaultMarkdownSerializer.serialize(document);
+  return markdownSerializer.serialize(document);
 };
 
 export const createDecorations = (
@@ -34,11 +50,11 @@ export const createDecorations = (
         suggestion.selectionStart,
         suggestion.selectionEnd,
         {
-          class: 'suggestion-highlight',
+          class: "suggestion-highlight",
         },
         {
           suggestionId: suggestion.id,
-          type: 'highlight',
+          type: "highlight",
         },
       ),
     );
@@ -52,7 +68,7 @@ export const createDecorations = (
         },
         {
           suggestionId: suggestion.id,
-          type: 'widget',
+          type: "widget",
         },
       ),
     );

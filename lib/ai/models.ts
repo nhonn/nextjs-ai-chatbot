@@ -21,13 +21,13 @@ export const models: Array<Model> = [
     description: "For complex, multi-step tasks",
   },
   {
-    id: "claude 3.5 sonnet",
+    id: "claude-3-5-sonnet-20241022",
     label: "Claude 3.5 Sonnet",
     apiIdentifier: "claude-3-5-sonnet-20241022",
     description: "For creative, multi-step tasks",
   },
   {
-    id: "claude 3.5 haiku",
+    id: "claude-3-5-haiku-20241022",
     label: "Claude 3.5 Haiku",
     apiIdentifier: "claude-3-5-haiku-20241022",
     description: "For creative, multi-step tasks",
