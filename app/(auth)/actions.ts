@@ -15,11 +15,9 @@ export interface LoginActionState {
   status: 'idle' | 'in_progress' | 'success' | 'failed' | 'invalid_data';
 }
 
-const WHITELIST_EMAILS = [
-  'nhonnt97@gmail.com',
-  'nhonn@duck.com',
-  'uyenthitd@gmail.com',
-];
+const WHITELIST_EMAILS: string[] = (
+  process.env.NEXT_PUBLIC_WHITELIST_EMAILS || ''
+).split(' ');
 
 export const login = async (
   _: LoginActionState,
@@ -73,7 +71,10 @@ export const register = async (
     if (user) {
       return { status: 'user_exists' } as RegisterActionState;
     }
-    if (!WHITELIST_EMAILS.includes(validatedData.email)) {
+    if (
+      WHITELIST_EMAILS.length > 0 &&
+      !WHITELIST_EMAILS.includes(validatedData.email)
+    ) {
       return { status: 'not_whitelisted' } as RegisterActionState;
     }
     await createUser(validatedData.email, validatedData.password);
