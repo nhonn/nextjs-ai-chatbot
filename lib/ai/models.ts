@@ -9,29 +9,17 @@ export interface Model {
 
 export const models: Array<Model> = [
   {
-    id: 'gpt-4o-mini',
-    label: 'GPT 4o mini',
-    apiIdentifier: 'gpt-4o-mini',
-    description: 'Small model for fast, lightweight tasks',
-  },
-  {
-    id: 'gpt-4o',
-    label: 'GPT 4o',
-    apiIdentifier: 'gpt-4o',
-    description: 'For complex, multi-step tasks',
-  },
-  {
-    id: 'claude-3-5-sonnet-20241022',
-    label: 'Claude 3.5 Sonnet',
-    apiIdentifier: 'claude-3-5-sonnet-20241022',
+    id: 'claude-3-haiku-20240307',
+    label: 'Claude 3 Haiku',
+    apiIdentifier: 'claude-3-haiku-20240307',
     description: 'For creative, multi-step tasks',
   },
   {
-    id: 'claude-3-5-haiku-20241022',
+    id: 'claude-3-5-haiku-latest',
     label: 'Claude 3.5 Haiku',
-    apiIdentifier: 'claude-3-5-haiku-20241022',
+    apiIdentifier: 'claude-3-5-haiku-latest',
     description: 'For creative, multi-step tasks',
   },
 ] as const;
 
-export const DEFAULT_MODEL_NAME: string = 'gpt-4o-mini';
+export const DEFAULT_MODEL_NAME: string = 'claude-3-haiku-20240307';
